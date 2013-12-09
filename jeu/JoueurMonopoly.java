@@ -8,45 +8,54 @@ import monopoly.evenements.Evenement;
 import monopoly.proprietes.Propriete;
 
 /**
- * 
- * @author DELVALLEE Adrien, Elodie JOLY
+ *@author DELVALLEE Adrien, Elodie JOLY
  *Classe represantant un joueur de monopoly
  */
 public class JoueurMonopoly implements Joueur {
 
+		public static ArrayList<Joueur> listeJoueur = new ArrayList<Joueur>(); 
         private int numero;
         private String nom;
         private int especes;
-        private List<Joueur> adversaires;
         private boolean estElimine;
         private List<Propriete> proprietes;
-        
+        private Case position;
+        private Stack<Evenement> chosesAFaire = new Stack<Evenement>();
+        private ArrayList<Evenement> cartesPossedees = new ArrayList<Evenement>();
+        private boolean estEnPrison;
+        /**
+         * Crée un joueur de monopoly
+         * @param numero
+         * @param nom
+         * @param especes
+         */
         public JoueurMonopoly(int numero,String nom,int especes){
                 this.numero = numero;
                 this.nom = nom;
                 this.especes = especes;
                 this.estElimine = false;
-                adversaires = new ArrayList<Joueur>();
                 proprietes = new ArrayList<Propriete>();
+                listeJoueur.add(this);
+                estEnPrison = false;
                 
         }
-        
+         //Retourne le numero du joueur
         public int numero() {
                 return numero;
         }
-        
+         //Retourne le nom du joueur
         public String nom() {
                 return nom;
         }
 
-        @Override
+        //Verifie si le joueur est en prison
         public boolean enPrison() {
-                return position().nom() == "Prison";
+               return estEnPrison;
         }
 
         @Override
         public void emprisonner() {
-                // TODO Auto-generated method stub
+                this.estEnPrison = true;
                 
         }
 
@@ -57,15 +66,16 @@ public class JoueurMonopoly implements Joueur {
 
         @Override
         public void eliminer() {
-                // TODO Auto-generated method stub
+                this.estElimine = true;
                 
         }
 
+        //Retourne la monaie disponible
         public int especes() {
                 return especes;
         }
 
-        
+        //Retire "somme" au crédit du joueur
         public boolean payer(int somme) {
                 if (especes >= somme) {
                         especes -= somme;
@@ -74,27 +84,26 @@ public class JoueurMonopoly implements Joueur {
                 return false;
         }
 
-        @Override
+        //Ajoute "somme" au solde du joueur
         public void verser(int somme) {
                 especes += somme;
                 
         }
 
-        @Override
+        
         public Case position() {
-                // TODO Auto-generated method stub
-                return null;
+                return position;
         }
 
-        @Override
+        
         public void placerSur(Case c) {
-                // TODO Auto-generated method stub
+               this.position = c;
         	
         }
 
-        @Override
+        //Retourne la liste des adversaires
         public List<Joueur> adversaires() {
-                return adversaires;
+                return listeJoueur;
         }
 
         @Override
@@ -104,18 +113,13 @@ public class JoueurMonopoly implements Joueur {
 
         @Override
         public List<Evenement> cartes() {
-                // TODO Auto-generated method stub
-                return null;
+               return cartesPossedees;
         }
 
         @Override
         public Stack<Evenement> chosesAFaire() {
-                // TODO Auto-generated method stub
-                return null;
+                return chosesAFaire;
         }
         
-        public static void main(String [] argv){
-        	System.out.println("Hello World");
-        }
-
+       
 }
