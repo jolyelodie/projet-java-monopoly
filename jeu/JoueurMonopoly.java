@@ -10,6 +10,7 @@ import monopoly.proprietes.Propriete;
 /**
  *@author DELVALLEE Adrien, Elodie JOLY
  *Classe represantant un joueur de monopoly
+ *Modifie le : 9 décembre 2013
  */
 public class JoueurMonopoly implements Joueur {
 
