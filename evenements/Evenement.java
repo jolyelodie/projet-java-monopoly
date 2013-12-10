@@ -10,5 +10,7 @@ public interface Evenement {
      * ou de la carte) */
     String nom() ;
     /** Le joueur qui subit l'événement */
-    Joueur cible() ;    
+    Joueur cible() ;   
+    /** Execute l'événement */
+    void executer();
 }
